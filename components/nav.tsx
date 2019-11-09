@@ -11,7 +11,7 @@ class Nav extends Component<INavProps, {}> {
         return (
             <nav>
                 <div className="flex justify-center bg-gray-100 p-4 w-full">
-                    <div className="flex lg:w-1/2 w-5/6 text-gray-700">
+                    <div className="flex w-full text-gray-700">
                         <div className="p-2">
                             <a className=""
                                 onClick={this.selectIssueTemplate}
@@ -21,9 +21,8 @@ class Nav extends Component<INavProps, {}> {
                             <a onClick={this.selectRangerTemplate}
                                 style={{ cursor: "pointer" }}>Holger Förster</a>
                         </span>
-                        <img className="rounded-full" 
-                            src="holger.jpg" 
-                            style={{ height: "40px", width: "40px", cursor: "pointer" }}
+                        <img src="holger.jpg"
+                            style={{ height: "40px", width: "40px", cursor: "pointer", borderRadius: "5px" }}
                             onClick={this.selectRangerTemplate} />
                     </div>
                 </div>
