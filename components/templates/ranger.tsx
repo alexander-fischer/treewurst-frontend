@@ -1,11 +1,11 @@
 import dynamic from "next/dynamic"
-import Meta from "../components/meta"
+import Meta from "../meta"
 const Map = dynamic(
-    () => import("../components/map"),
+    () => import("../map"),
     { ssr: false }
 )
 
-const RangerView = () => {
+const RangerTemplate = () => {
     return (
         <div>
             <Meta
@@ -18,4 +18,4 @@ const RangerView = () => {
     )
 }
 
-export default RangerView
+export default RangerTemplate
