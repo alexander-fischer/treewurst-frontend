@@ -1,5 +1,6 @@
 import React, { Component } from "react"
-import { Map, TileLayer } from "react-leaflet"
+import { Map, TileLayer, GeoJSON } from "react-leaflet"
+import { geoJSON } from "../src/geojson"
 
 interface ITreeMapProps {
     width: string
@@ -12,7 +13,13 @@ export default class TreeMap extends Component<ITreeMapProps, {}> {
             lat: 51.0997605,
             lng: 13.8213171,
         },
-        zoom: 13,
+        zoom: 12,
+    }
+
+    myStyle = {
+        "color": "red",
+        "weight": 5,
+        "opacity": 0.65
     }
 
     render() {
@@ -27,6 +34,7 @@ export default class TreeMap extends Component<ITreeMapProps, {}> {
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
 
+                    <GeoJSON data={geoJSON} style={this.myStyle} />
                 </Map>
                 <style jsx>{`
                     .map-root {

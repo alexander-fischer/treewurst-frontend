@@ -22,6 +22,9 @@ class Home extends Component {
 
                 <div className="mt-8">
                     <div className="flex justify-center">
+                        <h2 className="text-gray-700" style={{ fontSize: "2rem" }}>Meldung</h2>
+                    </div>
+                    <div className="flex justify-center mt-4">
                         <input className="lg:w-1/3 bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
                             type="email"
                             placeholder="Deine Mailadresse" />
@@ -47,7 +50,7 @@ class Home extends Component {
                         </button>
                     </div>
                 </div>
-            </div>
+            </div >
         )
     }
 
