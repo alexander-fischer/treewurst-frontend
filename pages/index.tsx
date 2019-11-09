@@ -25,6 +25,7 @@ class Index extends Component<WithRouterProps, { selectedTemplate: any }> {
                     title="TreeWurst" />
                 <Nav
                     selectTemplate={this.selectTemplate} />
+
                 {selectedTemplate}
             </div>
         )

@@ -19,7 +19,7 @@ export default class TreeMap extends Component<ITreeMapProps, {}> {
             lat: 51.0997605,
             lng: 13.8213171,
         },
-        zoom: 12,
+        zoom: 13,
         selectedLayer: null
     }
 
