@@ -15,11 +15,5 @@
         "env": {
             "ENV": "production"
         }
-    },
-    "routes": [
-        {
-            "src": "/(?<id>[^/]+)$",
-            "dest": "/index?id=$id"
-        }
-    ]
+    }
 }
