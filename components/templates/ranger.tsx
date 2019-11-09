@@ -7,7 +7,7 @@ const Map = dynamic(
 const RangerTemplate = () => {
     return (
         <div>
-            <div style={{ marginLeft: "10%", marginRight: "10%" }}>
+            <div>
                 <Map
                     width="100%"
                     height="500px" />

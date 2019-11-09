@@ -17,14 +17,14 @@ class Nav extends Component<INavProps, {}> {
                                 onClick={this.selectIssueTemplate}
                                 style={{ cursor: "pointer" }}>Home</a>
                         </div>
-
-                        <div className="p-2">
-                            <a className=""
-                                onClick={this.selectRangerTemplate}
-                                style={{ cursor: "pointer" }}>Förster</a>
-                        </div>
-                        <span className="p-2 text-gray-600" style={{ marginLeft: "auto", marginRight: "5px" }}>Holger Förster</span>
-                        <img className="rounded-full" src="holger.jpg" style={{ height: "40px", width: "40px"}} />
+                        <span className="p-2" style={{ marginLeft: "auto", marginRight: "5px" }}>
+                            <a onClick={this.selectRangerTemplate}
+                                style={{ cursor: "pointer" }}>Holger Förster</a>
+                        </span>
+                        <img className="rounded-full" 
+                            src="holger.jpg" 
+                            style={{ height: "40px", width: "40px", cursor: "pointer" }}
+                            onClick={this.selectRangerTemplate} />
                     </div>
                 </div>
             </nav>

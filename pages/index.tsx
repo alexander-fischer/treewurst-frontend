@@ -9,8 +9,8 @@ class Index extends Component<WithRouterProps, { selectedTemplate: any }> {
 
     constructor(props: WithRouterProps) {
         super(props)
-        const selectedTemplate = <IssueTemplate />
 
+        const selectedTemplate = <IssueTemplate />
         this.state = {
             selectedTemplate
         }
