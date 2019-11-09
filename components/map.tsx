@@ -59,7 +59,7 @@ export default class TreeMap extends Component<ITreeMapProps, {}> {
     
                     .leaflet-container {
                         height: 400px !important;
-                        width: 80%;
+                        width: 100%;
                         margin: 0 auto;
                     }
             `}</style>

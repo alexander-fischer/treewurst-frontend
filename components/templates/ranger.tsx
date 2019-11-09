@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic"
-import Meta from "../meta"
 const Map = dynamic(
     () => import("../map"),
     { ssr: false }
@@ -8,12 +7,11 @@ const Map = dynamic(
 const RangerTemplate = () => {
     return (
         <div>
-            <Meta
-                title="Förster" />
-
-            <Map
-                width="100%"
-                height="500px" />
+            <div style={{ marginLeft: "10%", marginRight: "10%" }}>
+                <Map
+                    width="100%"
+                    height="500px" />
+            </div>
         </div>
     )
 }
