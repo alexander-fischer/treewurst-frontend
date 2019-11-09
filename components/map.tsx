@@ -1,10 +1,16 @@
 import React, { Component } from "react"
-import { Map, TileLayer, GeoJSON } from "react-leaflet"
+import { Map, TileLayer, GeoJSON, Popup } from "react-leaflet"
 import { geoJSON } from "../src/geojson"
 
 interface ITreeMapProps {
     width: string
     height: string
+}
+
+const geoJSONStyle = {
+    "color": "red",
+    "weight": 5,
+    "opacity": 0.65
 }
 
 export default class TreeMap extends Component<ITreeMapProps, {}> {
@@ -14,27 +20,33 @@ export default class TreeMap extends Component<ITreeMapProps, {}> {
             lng: 13.8213171,
         },
         zoom: 12,
-    }
-
-    myStyle = {
-        "color": "red",
-        "weight": 5,
-        "opacity": 0.65
+        selectedLayer: null
     }
 
     render() {
         const position = [this.state.center.lat, this.state.center.lng]
         const { width, height } = this.props
+        const { selectedLayer } = this.state
+
+        let popup = null
+        if (selectedLayer) {
+            popup = <Popup
+                position={selectedLayer.position}>A pretty CSS3 popup.</Popup>
+        }
 
         return (
             <div className="map-root">
                 <Map center={position} zoom={this.state.zoom} style={{ height, width }}>
                     <TileLayer
                         attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-                    <GeoJSON data={geoJSON} style={this.myStyle} />
+                    <GeoJSON
+                        data={geoJSON}
+                        style={geoJSONStyle}
+                        onEachFeature={this.onFeatureClick} />
+
+                    {popup}
                 </Map>
                 <style jsx>{`
                     .map-root {
@@ -48,6 +60,24 @@ export default class TreeMap extends Component<ITreeMapProps, {}> {
                     }
             `}</style>
             </div>
-        );
+        )
+    }
+
+    onFeatureClick = (_: any, layer: any) => {
+        layer.on("click", (e: any) => {
+            const { selectedLayer } = this.state
+            if (selectedLayer) {
+                this.setState({
+                    selectedLayer: null
+                })
+
+            } else {
+                this.setState({
+                    selectedLayer: {
+                        position: e.latlng
+                    }
+                })
+            }
+        })
     }
 }
