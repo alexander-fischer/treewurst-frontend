@@ -1,0 +1,25 @@
+{
+    "version": 2,
+    "name": "treewurst-frontend",
+    "builds": [
+        {
+            "src": "next.config.js",
+            "use": "@now/next"
+        },
+        {
+            "src": "public/*",
+            "use": "@now/static"
+        }
+    ],
+    "build": {
+        "env": {
+            "ENV": "production"
+        }
+    },
+    "routes": [
+        {
+            "src": "/(?<id>[^/]+)$",
+            "dest": "/index?id=$id"
+        }
+    ]
+}
