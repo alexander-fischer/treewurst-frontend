@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Map, TileLayer, GeoJSON, Popup } from "react-leaflet"
+import { Map, TileLayer, GeoJSON, Popup, WMSTileLayer } from "react-leaflet"
 import { geoJSON } from "../src/geojson"
 
 interface ITreeMapProps {
@@ -40,6 +40,10 @@ export default class TreeMap extends Component<ITreeMapProps, {}> {
                     <TileLayer
                         attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+
+                    <WMSTileLayer
+                        layers="L793"
+                        url="https://kommisdd.dresden.de/net3/public/ogc.ashx?NODEID=1040&Service=WMS&Request=GetCapabilities" />
 
                     <GeoJSON
                         data={geoJSON}

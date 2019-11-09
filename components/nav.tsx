@@ -13,6 +13,7 @@ class Nav extends Component<INavProps, {}> {
                 <div className="flex">
                     <a onClick={this.selectIssueTemplate}
                         style={{ cursor: "pointer" }}>Home</a>
+
                     <a onClick={this.selectRangerTemplate}
                         style={{ cursor: "pointer" }}>Förster</a>
                 </div>
