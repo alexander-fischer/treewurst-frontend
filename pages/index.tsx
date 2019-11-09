@@ -1,16 +1,15 @@
 import React from "react"
-import Head from "next/head"
 import Nav from "../components/nav"
+import Meta from "../components/meta"
 
 const Home = () => (
     <div>
-        <Head>
-            <title>Home</title>
-        </Head>
-
+        <Meta
+            title="Home" />
         <Nav />
 
-        <div>Hello World</div>
+        <h1>Home</h1>
+        <a href="/ranger">Zur Karte</a>
 
         <style jsx>{`
 
