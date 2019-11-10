@@ -1,17 +1,30 @@
 import { Component } from "react"
 import Loading from "../loading"
+import IssueModel, { ISSUE_TYPE } from "../../src/models/issue-model"
 
-class IssueTemplate extends Component {
+interface IIssueTemplateProps {
+    setIssue: (issue: IssueModel) => void
+}
+
+class IssueTemplate extends Component<IIssueTemplateProps, {}> {
 
     state = {
         gpsLoading: false,
-        position: null
+        position: null,
+        selectedOption: ISSUE_TYPE.DAMAGED_TREE,
+        description: ""
     }
 
     render() {
-        const { gpsLoading } = this.state
+        const { gpsLoading, description } = this.state
         const position: Position | null = this.state.position
         const readablePosition = this.createReadablePosition(position)
+
+        const options = this.optionsMap.map((issueType, index) => {
+            return (
+                <option key={index} value={issueType.value}>{issueType.label}</option>
+            )
+        })
 
         return (
             <div>
@@ -20,17 +33,25 @@ class IssueTemplate extends Component {
                         <h2 className="text-gray-700" style={{ fontSize: "2rem" }}>Meldung</h2>
                     </div>
 
-                    <div className="flex justify-center mt-4">
-                        <input className="lg:w-1/3 w-5/6 bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-                            type="email"
-                            placeholder="Deine Mailadresse" />
+                    <div className="flex justify-center mt-4 ">
+                        <div className="lg:w-1/3 w-5/6 relative inline-block">
+                            <select className="block appearance-none border-2 border-gray-200 rounded py-2 px-4 bg-gray-200 text-gray-700 leading-tight focus:outline-none w-full"
+                                onChange={this.selectOption}>
+                                {options}
+                            </select>
+                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
+                            </div>
+                        </div>
                     </div>
 
                     <div className="flex justify-center mt-4">
                         <div className="lg:w-1/3 w-5/6">
                             <textarea className="resize bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
                                 style={{ height: "100px", width: "100%" }}
-                                placeholder="Beschreibe dein Problem..." />
+                                placeholder="Beschreibe die Meldung..."
+                                value={description}
+                                onChange={this.onChangeDescription} />
                         </div>
                     </div>
 
@@ -44,7 +65,7 @@ class IssueTemplate extends Component {
                     </div>
 
                     <div className="flex justify-center mt-4">
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <button onClick={this.onClickBtn} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             Problem absenden
                         </button>
                     </div>
@@ -64,7 +85,7 @@ class IssueTemplate extends Component {
     }
 
     createReadablePosition = (position: Position | null) => {
-        if (!position) return undefined
+        if (!position) return ""
 
         const lat = position.coords.latitude
         const lng = position.coords.longitude
@@ -72,6 +93,37 @@ class IssueTemplate extends Component {
         return `${lat}, ${lng}`
     }
 
+    onChangeDescription = (e: any) => {
+        const description = e.target.value
+        this.setState({ description })
+    }
+
+    selectOption = (e: any) => {
+        const selectedOption = e.target.value
+        this.setState({ selectedOption })
+    }
+
+    optionsMap = [
+        { value: ISSUE_TYPE.DAMAGED_TREE, label: "Baum beschädigt" },
+        { value: ISSUE_TYPE.ANIMAL, label: "Tier" },
+        { value: ISSUE_TYPE.HEALTHY_TREE, label: "Gesunder Baum" },
+        { value: ISSUE_TYPE.MISC, label: "Verschiedenes" },
+        { value: ISSUE_TYPE.TREE_DEAD, label: "Toter Baum" },
+        { value: ISSUE_TYPE.TREE_SICK, label: "Kranker Baum" },
+    ]
+
+    /**
+     * TODO refine
+     */
+    onClickBtn = () => {
+        const { selectedOption, description, position } = this.state
+        if (!position) return
+
+        const issue = new IssueModel(description, position.coords.latitude, position.coords.longitude, selectedOption)
+        this.props.setIssue(issue)
+
+        this.setState({ position: null, description: "" })
+    }
 }
 
 export default IssueTemplate
