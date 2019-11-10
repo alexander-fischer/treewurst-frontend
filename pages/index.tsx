@@ -73,10 +73,12 @@ class Index extends Component<WithRouterProps, { selectedTemplate: any; app: any
 
 	setIssue = async (issue: IssueModel) => {
 		const db = firebase.firestore();
+		const id = new Date().toISOString()
 		await db
 			.collection("issues")
-			.doc(new Date().toISOString())
+			.doc(id)
 			.set({
+				id,
 				description: issue.description,
 				latitude: issue.latitude,
 				longitude: issue.longitude,
