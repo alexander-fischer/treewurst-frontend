@@ -3,26 +3,42 @@ import Wood from "../src/wood";
 import PageTitle from "./pageTitle";
 
 interface IWoodDetailViewProps {
-    woodItem: Wood,
+	woodItem: Wood,
 }
 
+import dynamic from "next/dynamic"
+const Chart = dynamic(
+	() => import("react-apexcharts"),
+	{ ssr: false }
+)
+
 export default class WoodDetailView extends Component<IWoodDetailViewProps, {}> {
-	state = {};
+	state = {
+		options: {
+			labels: ['Nadelbäume', 'Tothölzer', 'Laubbäume']
+		},
+		series: [this.props.woodItem.composition.percentage_conifer, this.props.woodItem.composition.percentage_dead_trees, this.props.woodItem.composition.percentage_deciduous],
+	};
 
 	render() {
 		return (
 			<div className="wood-details-container">
 				<PageTitle text={this.props.woodItem.name} />
-                <div>
-                    
-                </div>
-                <div className="wood-details-content">
-                    <div className="wood-details-shape"></div>
-                    <div className="wood-details-sidebar">
-                    </div>
-                </div>
-                
+				<div className="c">
+					<img src="/icons/map-marker.svg"></img>
+				</div>
+				<div className="wood-details-content">
+					<div className="wood-details-shape">
+					</div>
+					<div className="wood-details-sidebar">
+						<div className="donut">
+							<Chart options={this.state.options} series={this.state.series} type="donut" width="380" />
+						</div>
+					</div>
+				</div>
+
 				<style jsx>{`
+
 					.wood-details-container {
                         position: relative;
 						display: flex;
@@ -31,7 +47,12 @@ export default class WoodDetailView extends Component<IWoodDetailViewProps, {}> 
 						padding: 20px;
 						height: 90vh;
 						margin: 0;
-                    }
+					}
+					
+					.c {
+						display: flex;
+						justify-content: center;
+					}
                     
                     .wood-details-content {
 						display: flex;
