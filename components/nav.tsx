@@ -5,9 +5,9 @@ import IssueModel from "../src/models/issue-model";
 import WoodList from "./woodList";
 
 interface INavProps {
-    selectTemplate: (template: any) => void
-    setIssue: (issue: IssueModel) => void
-    issues: IssueModel[]
+	selectTemplate: (template: any) => void
+	setIssue: (issue: IssueModel) => void
+	issues: IssueModel[]
 }
 
 class Nav extends Component<INavProps, {}> {
