@@ -86,6 +86,7 @@ export default class WoodList extends Component<IWoodListProps, {}> {
 						display: flex;
 						flex-direction: row;
 						align-items: center;
+						height: 90px;
 					}
 					.wood-list-container {
 						display: flex;

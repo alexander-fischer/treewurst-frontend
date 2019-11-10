@@ -26,13 +26,15 @@ export default class CustomButton extends Component<ICustomButtonProps, {}> {
 						align-items: center;
 						cursor: pointer;
 						text-align: center;
+						user-select: none;
 					}
 
 					.large {
 						border-radius: 30px;
 						width: 200px;
-						font-size: 20px;
-						padding: 8px;
+						font-size: 19px;
+						padding: 5px;
+						font-weight: 300;
 					}
 
 					.small {
@@ -40,6 +42,7 @@ export default class CustomButton extends Component<ICustomButtonProps, {}> {
 						width: 170px;
 						font-size: 15px;
 						padding: 3px;
+						font-weight: 200;
 					}
 
 					.button-shape:hover {

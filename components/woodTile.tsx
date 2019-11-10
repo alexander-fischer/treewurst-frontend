@@ -86,6 +86,10 @@ export default class WoodTile extends Component<ICustomButtonProps, {}> {
 						cursor: pointer;
 					}
 
+					.tile-container:hover {
+						background-color: #A6CfAa;
+					}
+
 					.even-element {
 						background-color: #ebebeb;
 					}
