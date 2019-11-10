@@ -2,6 +2,8 @@ import React, { Component } from "react"
 import { Map, TileLayer, GeoJSON, Popup, WMSTileLayer, Circle } from "react-leaflet"
 import { geoJSON } from "../src/geojson"
 import IssueModel from "../src/models/issue-model"
+import HeatmapLayer from "react-leaflet-heatmap-layer"
+import { heatmap } from "../src/heatmap"
 
 interface ITreeMapProps {
     width: string
@@ -50,6 +52,17 @@ export default class TreeMap extends Component<ITreeMapProps, {}> {
                     attribution="Made by Teewurst"
                     url="/ndvi_tiles/{z}/{x}/{y}.png" />
                 break
+
+            case RADIO_MAP.HEATMAP:
+                mapFilter = <HeatmapLayer
+                    fitBoundsOnLoad
+                    fitBoundsOnUpdate
+                    points={heatmap}
+                    longitudeExtractor={m => m[1]}
+                    latitudeExtractor={m => m[0]}
+                    intensityExtractor={m => m[2]}
+                    blur={0} />
+                break
         }
 
         const circles = issues.map((issue, index) => {
@@ -84,6 +97,16 @@ export default class TreeMap extends Component<ITreeMapProps, {}> {
                                 checked={checkedFilter === RADIO_MAP.NDVI} />
                             <span className="text-sm">
                                 NDVI
+                            </span>
+                        </label>
+                        <label className="text-gray-500 font-bold mr-2">
+                            <input className="leading-tight mr-2"
+                                type="checkbox"
+                                value={RADIO_MAP.HEATMAP}
+                                onChange={() => this.onCheckboxSelect(RADIO_MAP.HEATMAP)}
+                                checked={checkedFilter === RADIO_MAP.HEATMAP} />
+                            <span className="text-sm">
+                                Heatmap
                             </span>
                         </label>
                     </div>
@@ -147,7 +170,8 @@ export default class TreeMap extends Component<ITreeMapProps, {}> {
 
 enum RADIO_MAP {
     TREE_TYPES = "TREE_TYPES",
-    NDVI = "NDVI"
+    NDVI = "NDVI",
+    HEATMAP = "HEATMAP"
 }
 
 /*
