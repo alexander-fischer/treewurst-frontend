@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { Map, TileLayer, GeoJSON } from "react-leaflet"
+import { getGeoJSON } from "../src/networking/api"
 
 interface ITreeMapProps {
     width: string
@@ -28,7 +29,7 @@ export default class SelectMap extends Component<ITreeMapProps, {}> {
         const { geoJSON } = this.state
 
         let geoJSONComponent = null
-        if (!geoJSONComponent) {
+        if (!geoJSON) {
             geoJSONComponent = <GeoJSON
                 data={geoJSON}
                 style={geoJSONStyle} />
@@ -45,7 +46,7 @@ export default class SelectMap extends Component<ITreeMapProps, {}> {
                             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-                        {geoJSON}
+                        {geoJSONComponent}
 
                     </Map>
                     <style jsx>{`
@@ -65,8 +66,13 @@ export default class SelectMap extends Component<ITreeMapProps, {}> {
     }
 
     // TODO implement backend api
-    handleClick = (e) => {
+    handleClick = async (e) => {
         const latlng = e.latlng
-        console.log(latlng)
+        const res = await getGeoJSON(latlng.lat, latlng.lng)
+        console.log(res)
+
+        if (!res) return
+
+        this.setState({ geoJSON: res[1] })
     }
 }
