@@ -12,7 +12,6 @@ interface IRangerTemplateProps {
 }
 
 const RangerTemplate = (props: IRangerTemplateProps) => {
-    console.log(props.issues)
     return (
         <div>
             <div>
@@ -20,7 +19,12 @@ const RangerTemplate = (props: IRangerTemplateProps) => {
                     width="100%"
                     height="500px" />
             </div>
-            <Issues />
+            <div className="flex justify-center mt-4 mb-8">
+                <div className="w-3/4">
+                    <Issues
+                        issues={props.issues} />
+                </div>
+            </div>
         </div>
     )
 }
