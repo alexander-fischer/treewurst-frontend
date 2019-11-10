@@ -2,19 +2,19 @@ import React, { Component } from "react";
 import CustomButton from "./button";
 import PageTitle from "./pageTitle";
 
-interface IAddWoodPageProps {}
+interface IAddWoodPageProps { }
 
 import dynamic from "next/dynamic"
-const Map = dynamic(
-    () => import("./map"),
-    { ssr: false }
+const SelectMap = dynamic(
+	() => import("./select-map"),
+	{ ssr: false }
 )
 
 export default class AddWoodPage extends Component<IAddWoodPageProps, {}> {
 	state = {};
 
-	onClickFinish() {}
-	onClickResetSelection() {}
+	onClickFinish() { }
+	onClickResetSelection() { }
 
 	render() {
 		return (
@@ -22,10 +22,10 @@ export default class AddWoodPage extends Component<IAddWoodPageProps, {}> {
 				<PageTitle text="Wald Allokation" />
 				<div className="add-wood-content">
 					<div className="add-wood-map">
-						<Map
-							height="400px"
-							width="100%"
-							issues={[]} />
+						<SelectMap
+							height="500px"
+							width="100%" 
+							setGeoJSONID={this.setGeoJSONID}/>
 					</div>
 					<div className="add-wood-sidebar">
 						<div className="add-wood-task">
@@ -108,5 +108,9 @@ export default class AddWoodPage extends Component<IAddWoodPageProps, {}> {
 				`}</style>
 			</div>
 		);
+	}
+
+	setGeoJSONID = (geoJSONID: string) => {
+		this.setState({ geoJSONID })
 	}
 }
