@@ -5,14 +5,22 @@ import { withRouter } from "next/router"
 import { WithRouterProps } from "next/dist/client/with-router"
 import IssueTemplate from "../components/templates/issue"
 
-class Index extends Component<WithRouterProps, { selectedTemplate: any }> {
+import * as firebase from "firebase/app"
+import "firebase/auth"
+import "firebase/firestore"
+import IssueModel from "../src/models/issue-model"
+
+class Index extends Component<WithRouterProps, { selectedTemplate: any, app: any, issues: any[] }> {
 
     constructor(props: WithRouterProps) {
         super(props)
 
-        const selectedTemplate = <IssueTemplate />
+        const selectedTemplate = <IssueTemplate
+            setIssue={this.setIssue} />
         this.state = {
-            selectedTemplate
+            selectedTemplate,
+            app: null,
+            issues: []
         }
     }
 
@@ -23,11 +31,61 @@ class Index extends Component<WithRouterProps, { selectedTemplate: any }> {
                 <Meta
                     title="TreeWurst" />
                 <Nav
+                    setIssue={this.setIssue}
                     selectTemplate={this.selectTemplate} />
 
                 {selectedTemplate}
             </div>
         )
+    }
+
+    componentDidMount() {
+        this.initFirebase()
+        this.getIssues()
+    }
+
+    firebaseConfig = {
+        apiKey: "AIzaSyDD5O-60ru9Jz8olQ57duxliRjB4pY9Y4A",
+        authDomain: "treewurst.firebaseapp.com",
+        databaseURL: "https://treewurst.firebaseio.com",
+        projectId: "treewurst",
+        storageBucket: "treewurst.appspot.com",
+        messagingSenderId: "283130025049",
+        appId: "1:283130025049:web:312075581cbe28b27d4d48"
+    }
+
+    initFirebase = () => {
+        const apps = firebase.apps
+        if (apps.length === 0) {
+            const app = firebase.initializeApp(this.firebaseConfig)
+            this.setState({ app })
+
+        } else {
+            this.setState({ app: apps[0] })
+        }
+    }
+
+    getIssues = () => {
+        const db = firebase.firestore()
+
+        db.collection("issues").onSnapshot((querySnapshot) => {
+            const issues = []
+            querySnapshot.forEach((doc) => {
+                issues.push(doc.data())
+            })
+            this.setState({ issues })
+        })
+    }
+
+    setIssue = async (issue: IssueModel) => {
+        const db = firebase.firestore()
+        console.log(issue)
+        await db.collection("issues").doc((new Date()).toISOString()).set({
+            description: issue.description,
+            lat: issue.latitude,
+            lng: issue.longitude,
+            type: issue.issueType
+        })
     }
 
     selectTemplate = (template: any) => {

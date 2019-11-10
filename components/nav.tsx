@@ -1,9 +1,11 @@
 import React, { Component } from "react"
 import RangerTemplate from "./templates/ranger"
 import IssueTemplate from "./templates/issue"
+import IssueModel from "../src/models/issue-model"
 
 interface INavProps {
     selectTemplate: (template: any) => void
+    setIssue: (issue: IssueModel) => void
 }
 
 class Nav extends Component<INavProps, {}> {
@@ -36,7 +38,8 @@ class Nav extends Component<INavProps, {}> {
     }
 
     selectIssueTemplate = () => {
-        const selectedTemplate = <IssueTemplate />
+        const selectedTemplate = <IssueTemplate
+            setIssue={this.props.setIssue} />
         this.props.selectTemplate(selectedTemplate)
     }
 }
