@@ -25,12 +25,13 @@ class Index extends Component<WithRouterProps, { selectedTemplate: any, app: any
     }
 
     render() {
-        const { selectedTemplate } = this.state
+        const { selectedTemplate, issues } = this.state
         return (
             <div>
                 <Meta
                     title="TreeWurst" />
                 <Nav
+                    issues={issues}
                     setIssue={this.setIssue}
                     selectTemplate={this.selectTemplate} />
 
