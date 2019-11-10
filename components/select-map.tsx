@@ -5,6 +5,7 @@ import { getGeoJSON } from "../src/networking/api"
 interface ITreeMapProps {
     width: string
     height: string
+    setGeoJSONID: (geoJSONID: string) => void
 }
 
 const geoJSONStyle = {
@@ -69,10 +70,10 @@ export default class SelectMap extends Component<ITreeMapProps, {}> {
     handleClick = async (e) => {
         const latlng = e.latlng
         const res = await getGeoJSON(latlng.lat, latlng.lng)
-        console.log(res)
 
         if (!res) return
 
         this.setState({ geoJSON: res[1] })
+        this.props.setGeoJSONID(res[0])
     }
 }
