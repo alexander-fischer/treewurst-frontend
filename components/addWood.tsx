@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import PageTitle from "./pageTitle";
 import CustomButton from "./button";
+import PageTitle from "./pageTitle";
 
 interface IAddWoodPageProps {}
 
@@ -20,15 +20,17 @@ export default class AddWoodPage extends Component<IAddWoodPageProps, {}> {
 						<div className="add-wood-task">
 							<span className="add-wood-task-title">1. Auswahl auf Karte</span>
 							<span className="add-wood-task-desc">Wählen Sie Ihr Gebiet auf der Karte.</span>
-						</div>
-						<div className="add-wood-task">
-							<span className="add-wood-task-title">2. Name</span>
 							<CustomButton
 								small
 								text="Auswahl zurücksetzen"
 								onClick={() => this.onClickResetSelection()}
 							/>
-							<span className="add-wood-task-desc">Wählen Sie Ihr Gebiet auf der Karte.</span>
+						</div>
+						<div className="add-wood-task">
+							<span className="add-wood-task-title">2. Name (Optional)</span>
+							<span className="add-wood-task-desc">
+								Geben sie einen Namen an. Andernfalls wird der Name des Waldes angenommen.
+							</span>
 						</div>
 						<div className="add-wood-task">
 							<span className="add-wood-task-title">3. Fertigstellen</span>

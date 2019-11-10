@@ -3,8 +3,12 @@ import WoodTile from "./woodTile";
 import PageTitle from "./pageTitle";
 import CheckBox from "./checkbox";
 import CustomButton from "./button";
+import Wood from "../src/wood";
 
-interface IWoodListProps {}
+interface IWoodListProps {
+	onSelectTile: (item: Wood) => void;
+	onSelectAdd: () => void;
+}
 
 export default class WoodList extends Component<IWoodListProps, {}> {
 	state = {
@@ -53,14 +57,12 @@ export default class WoodList extends Component<IWoodListProps, {}> {
 		console.log(enabled);
 	}
 
-	onAddButtonClick() {}
-
 	render() {
 		let counter = 0;
 		let list = this.state.items.map(item => {
 			counter++;
 
-			return <WoodTile odd={counter} woodItem={item} />;
+			return <WoodTile onSelect={this.props.onSelectTile} odd={counter} woodItem={item} />;
 		});
 
 		return (
@@ -76,7 +78,7 @@ export default class WoodList extends Component<IWoodListProps, {}> {
 						onCheckedStateChanged={enabled => this.onCheckBoxStateChanged("filter2", enabled)}
 					></CheckBox>
 					<div className="wood-list-add-button">
-						<CustomButton onClick={() => this.onAddButtonClick()} text="Wald allokalisieren"></CustomButton>
+						<CustomButton onClick={() => this.props.onSelectAdd()} text="Wald allokalisieren"></CustomButton>
 					</div>
 				</div>
 				<div className="wood-list">{list}</div>

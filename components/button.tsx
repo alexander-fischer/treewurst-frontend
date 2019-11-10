@@ -13,7 +13,7 @@ export default class CustomButton extends Component<ICustomButtonProps, {}> {
 		if (this.props.small) {
 		}
 		return (
-			<div>
+			<div onClick={() => this.props.onClick()}>
 				<div className={"button-shape " + (this.props.small ? "small" : "large")}>{this.props.text}</div>
 				<style jsx>{`
 					.button-shape {
@@ -35,6 +35,7 @@ export default class CustomButton extends Component<ICustomButtonProps, {}> {
 						font-size: 19px;
 						padding: 5px;
 						font-weight: 300;
+						margin: 7px;
 					}
 
 					.small {
@@ -43,6 +44,7 @@ export default class CustomButton extends Component<ICustomButtonProps, {}> {
 						font-size: 15px;
 						padding: 3px;
 						font-weight: 200;
+						margin: 4px;
 					}
 
 					.button-shape:hover {
