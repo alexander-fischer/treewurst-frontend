@@ -17,7 +17,8 @@ const RangerTemplate = (props: IRangerTemplateProps) => {
             <div>
                 <Map
                     width="100%"
-                    height="500px" />
+                    height="500px"
+                    issues={props.issues} />
             </div>
             <div className="flex justify-center mt-4 mb-8">
                 <div className="lg:w-1/2 w-5/6 items-center">

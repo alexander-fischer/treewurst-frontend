@@ -1,10 +1,12 @@
 import React, { Component } from "react"
-import { Map, TileLayer, GeoJSON, Popup, WMSTileLayer } from "react-leaflet"
+import { Map, TileLayer, GeoJSON, Popup, WMSTileLayer, Circle } from "react-leaflet"
 import { geoJSON } from "../src/geojson"
+import IssueModel from "../src/models/issue-model"
 
 interface ITreeMapProps {
     width: string
     height: string
+    issues?: IssueModel[]
 }
 
 const geoJSONStyle = {
@@ -26,7 +28,7 @@ export default class TreeMap extends Component<ITreeMapProps, {}> {
 
     render() {
         const position = [this.state.center.lat, this.state.center.lng]
-        const { width, height } = this.props
+        const { width, height, issues } = this.props
         const { selectedLayer, checkedFilter } = this.state
 
         let popup = null
@@ -49,6 +51,16 @@ export default class TreeMap extends Component<ITreeMapProps, {}> {
                     url="/ndvi_tiles/{z}/{x}/{y}.png" />
                 break
         }
+
+        const circles = issues.map((issue, index) => {
+            const latlng = [issue.latitude, issue.longitude]
+            return (
+                <Circle
+                    key={index}
+                    center={latlng}
+                    radius="5px" />
+            )
+        })
 
         return (
             <div className="map-wrapper">
@@ -88,6 +100,8 @@ export default class TreeMap extends Component<ITreeMapProps, {}> {
                             data={geoJSON}
                             style={geoJSONStyle}
                             onEachFeature={this.onFeatureClick} />
+
+                        {circles}
 
                         {popup}
                     </Map>
