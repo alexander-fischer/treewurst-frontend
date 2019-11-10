@@ -1,9 +1,12 @@
 import { Component } from "react"
 import Loading from "../loading"
 import IssueModel, { ISSUE_TYPE } from "../../src/models/issue-model"
-import { postIssue } from "../../src/networking/api"
 
-class IssueTemplate extends Component {
+interface IIssueTemplateProps {
+    setIssue: (issue: IssueModel) => void
+}
+
+class IssueTemplate extends Component<IIssueTemplateProps, {}> {
 
     state = {
         gpsLoading: false,
@@ -62,7 +65,7 @@ class IssueTemplate extends Component {
                     </div>
 
                     <div className="flex justify-center mt-4">
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <button onClick={this.onClickBtn} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             Problem absenden
                         </button>
                     </div>
@@ -82,7 +85,7 @@ class IssueTemplate extends Component {
     }
 
     createReadablePosition = (position: Position | null) => {
-        if (!position) return undefined
+        if (!position) return ""
 
         const lat = position.coords.latitude
         const lng = position.coords.longitude
@@ -116,8 +119,10 @@ class IssueTemplate extends Component {
         const { selectedOption, description, position } = this.state
         if (!position) return
 
-        const issue = new IssueModel(description, position.coordinates.latitude, position.coordinates.longitude, selectedOption)
-        postIssue(issue)
+        const issue = new IssueModel(description, position.coords.latitude, position.coords.longitude, selectedOption)
+        this.props.setIssue(issue)
+
+        this.setState({ position: null, description: "" })
     }
 }
 
