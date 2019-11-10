@@ -85,7 +85,7 @@ class IssueTemplate extends Component<IIssueTemplateProps, {}> {
     }
 
     createReadablePosition = (position: Position | null) => {
-        if (!position) return undefined
+        if (!position) return ""
 
         const lat = position.coords.latitude
         const lng = position.coords.longitude
@@ -121,6 +121,8 @@ class IssueTemplate extends Component<IIssueTemplateProps, {}> {
 
         const issue = new IssueModel(description, position.coords.latitude, position.coords.longitude, selectedOption)
         this.props.setIssue(issue)
+
+        this.setState({ position: null, description: "" })
     }
 }
 
