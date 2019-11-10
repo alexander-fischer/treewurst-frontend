@@ -2,8 +2,6 @@ import React, { Component } from "react"
 import { Map, TileLayer, GeoJSON, Popup, WMSTileLayer, Circle } from "react-leaflet"
 import { geoJSON } from "../src/geojson"
 import IssueModel from "../src/models/issue-model"
-import HeatmapLayer from "react-leaflet-heatmap-layer"
-import { heatmap } from "../src/heatmap"
 
 interface ITreeMapProps {
     width: string
@@ -54,14 +52,9 @@ export default class TreeMap extends Component<ITreeMapProps, {}> {
                 break
 
             case RADIO_MAP.HEATMAP:
-                mapFilter = <HeatmapLayer
-                    fitBoundsOnLoad
-                    fitBoundsOnUpdate
-                    points={heatmap}
-                    longitudeExtractor={m => m[1]}
-                    latitudeExtractor={m => m[0]}
-                    intensityExtractor={m => m[2]}
-                    blur={0} />
+                mapFilter = <TileLayer
+                    attribution="Made by Teewurst"
+                    url="/heattiles/{z}/{x}/{y}.png" />
                 break
         }
 
