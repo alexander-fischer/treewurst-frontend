@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PageTitle from "./PageTitle";
+import PageTitle from "./pageTitle";
 import CustomButton from "./button";
 
 interface IAddWoodPageProps {}
