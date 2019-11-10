@@ -39,11 +39,12 @@ export default class AddWoodPage extends Component<IAddWoodPageProps, {}> {
 						<div className="add-wood-task">
 							<span className="add-wood-task-title">2. Name (Optional)</span>
 							<span className="add-wood-task-desc">
-								Geben sie einen Namen an. Andernfalls wird der Name des Waldes angenommen.
+								Geben Sie einen Namen an. Andernfalls wird der Name des Waldes angenommen.
 							</span>
 						</div>
 						<div className="add-wood-task">
 							<span className="add-wood-task-title">3. Fertigstellen</span>
+							<span className="add-wood-task-desc">Klicken Sie auf Fertigstellen.</span>
 						</div>
 						<div className="add-wood-add-button">
 							<CustomButton text="Fertigstellen" onClick={() => this.onClickFinish()} />

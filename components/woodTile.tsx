@@ -3,8 +3,8 @@ import Wood, { TreeType } from "../src/wood";
 
 interface ICustomButtonProps {
 	woodItem: Wood;
-    odd: number;
-    onSelect: (item: Wood) => void
+	odd: number;
+	onSelect: (item: Wood) => void;
 }
 
 function getIconForSpecies(ts: TreeType) {
@@ -88,7 +88,7 @@ export default class WoodTile extends Component<ICustomButtonProps, {}> {
 					}
 
 					.tile-container:hover {
-						background-color: #A6CfAa;
+						background-color: #a6cfaa;
 					}
 
 					.even-element {
@@ -101,7 +101,6 @@ export default class WoodTile extends Component<ICustomButtonProps, {}> {
 
 					.wood-tile-name {
 						font-size: 24px;
-						color: black;
 					}
 					.wood-tile-location {
 						margin-left: 50px;
