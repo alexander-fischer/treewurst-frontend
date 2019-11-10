@@ -26,11 +26,7 @@ class Nav extends Component<INavProps, {}> {
 							<a className="" onClick={this.selectIssueTemplate} style={{ cursor: "pointer" }}>
 								Home
 							</a>
-							<a
-								className=""
-								onClick={this.selectWoodListTemplate}
-								style={{ cursor: "pointer", marginLeft: "20px" }}
-							>
+							<a className="ml-2" onClick={this.selectWoodListTemplate} style={{ cursor: "pointer" }}>
 								Wälder
 							</a>
 						</div>

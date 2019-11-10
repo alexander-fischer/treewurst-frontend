@@ -4,6 +4,12 @@ import PageTitle from "./pageTitle";
 
 interface IAddWoodPageProps {}
 
+import dynamic from "next/dynamic"
+const Map = dynamic(
+    () => import("./map"),
+    { ssr: false }
+)
+
 export default class AddWoodPage extends Component<IAddWoodPageProps, {}> {
 	state = {};
 
@@ -16,7 +22,10 @@ export default class AddWoodPage extends Component<IAddWoodPageProps, {}> {
 				<PageTitle text="Wald Allokation" />
 				<div className="add-wood-content">
 					<div className="add-wood-map">
-						
+						<Map
+							height="400px"
+							width="100%"
+							issues={[]} />
 					</div>
 					<div className="add-wood-sidebar">
 						<div className="add-wood-task">
@@ -63,7 +72,6 @@ export default class AddWoodPage extends Component<IAddWoodPageProps, {}> {
 					.add-wood-map {
 						width: 75%;
 						height: 100%;
-						background-color: black;
 					}
 
 					.add-wood-sidebar {
