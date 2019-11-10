@@ -44,7 +44,6 @@ export default class WoodDetailView extends Component<IWoodDetailViewProps, {}> 
 					.wood-details-shape {
 						width: 75%;
 						height: 100%;
-						background-color: black;
 					}
 
 					.wood-details-sidebar {
