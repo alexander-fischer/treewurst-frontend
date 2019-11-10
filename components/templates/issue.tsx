@@ -119,7 +119,7 @@ class IssueTemplate extends Component<IIssueTemplateProps, {}> {
         const { selectedOption, description, position } = this.state
         if (!position) return
 
-        const issue = new IssueModel(description, position.coords.latitude, position.coords.longitude, selectedOption)
+        const issue = new IssueModel(description, position.coords.latitude, position.coords.longitude, selectedOption, false)
         this.props.setIssue(issue)
 
         this.setState({ position: null, description: "" })
