@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Map, TileLayer, GeoJSON, Popup, WMSTileLayer, Circle } from "react-leaflet"
+import { Map, TileLayer, GeoJSON, WMSTileLayer, Circle } from "react-leaflet"
 import { geoJSON } from "../src/geojson"
 import IssueModel from "../src/models/issue-model"
 
@@ -29,13 +29,7 @@ export default class TreeMap extends Component<ITreeMapProps, {}> {
     render() {
         const position = [this.state.center.lat, this.state.center.lng]
         const { width, height, issues } = this.props
-        const { selectedLayer, checkedFilter } = this.state
-
-        let popup = null
-        if (selectedLayer) {
-            popup = <Popup
-                position={selectedLayer.position}>A pretty CSS3 popup.</Popup>
-        }
+        const { checkedFilter } = this.state
 
         let mapFilter = null
         switch (checkedFilter) {
@@ -118,8 +112,6 @@ export default class TreeMap extends Component<ITreeMapProps, {}> {
                             onEachFeature={this.onFeatureClick} />
 
                         {circles}
-
-                        {popup}
                     </Map>
                     <style jsx>{`
                         .map-root {
