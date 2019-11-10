@@ -35,8 +35,6 @@ export default class TreeMap extends Component<ITreeMapProps, {}> {
                 position={selectedLayer.position}>A pretty CSS3 popup.</Popup>
         }
 
-        console.log(checkedFilter)
-
         let mapFilter = null
         switch (checkedFilter) {
             case RADIO_MAP.TREE_TYPES:

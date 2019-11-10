@@ -5,8 +5,9 @@ import IssueModel from "../src/models/issue-model";
 import WoodList from "./woodList";
 
 interface INavProps {
-	selectTemplate: (template: any) => void;
-	setIssue: (issue: IssueModel) => void;
+    selectTemplate: (template: any) => void
+    setIssue: (issue: IssueModel) => void
+    issues: IssueModel[]
 }
 
 class Nav extends Component<INavProps, {}> {
@@ -39,10 +40,11 @@ class Nav extends Component<INavProps, {}> {
 		);
 	}
 
-	selectRangerTemplate = () => {
-		const selectedTemplate = <RangerTemplate />;
-		this.props.selectTemplate(selectedTemplate);
-	};
+    selectRangerTemplate = () => {
+        const selectedTemplate = <RangerTemplate
+            issues={this.props.issues} />
+        this.props.selectTemplate(selectedTemplate)
+    }
 
 	selectIssueTemplate = () => {
 		const selectedTemplate = <IssueTemplate setIssue={this.props.setIssue} />;

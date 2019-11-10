@@ -23,11 +23,11 @@ class Index extends Component<WithRouterProps, { selectedTemplate: any; app: any
 	}
 
 	render() {
-		const { selectedTemplate } = this.state;
+		const { selectedTemplate, issues } = this.state;
 		return (
 			<div style={{ color: "#626262" }}>
 				<Meta title="TreeWurst" />
-				<Nav setIssue={this.setIssue} selectTemplate={this.selectTemplate} />
+				<Nav issues={issues} setIssue={this.setIssue} selectTemplate={this.selectTemplate} />
 
 				{selectedTemplate}
 			</div>
@@ -78,9 +78,9 @@ class Index extends Component<WithRouterProps, { selectedTemplate: any; app: any
 			.doc(new Date().toISOString())
 			.set({
 				description: issue.description,
-				lat: issue.latitude,
-				lng: issue.longitude,
-				type: issue.issueType,
+				latitude: issue.latitude,
+				longitude: issue.longitude,
+				issueType: issue.issueType,
 			});
 	};
 

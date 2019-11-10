@@ -1,16 +1,29 @@
+import IssueModel from "../../src/models/issue-model"
+import Issues from "../issues"
+
 import dynamic from "next/dynamic"
 const Map = dynamic(
     () => import("../map"),
     { ssr: false }
 )
 
-const RangerTemplate = () => {
+interface IRangerTemplateProps {
+    issues: IssueModel[]
+}
+
+const RangerTemplate = (props: IRangerTemplateProps) => {
     return (
         <div>
             <div>
                 <Map
                     width="100%"
                     height="500px" />
+            </div>
+            <div className="flex justify-center mt-4 mb-8">
+                <div className="w-3/4">
+                    <Issues
+                        issues={props.issues} />
+                </div>
             </div>
         </div>
     )

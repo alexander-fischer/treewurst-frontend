@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import WoodTile from "./woodTile";
-import PageTitle from "./PageTitle";
+import PageTitle from "./pageTitle";
 import CheckBox from "./checkbox";
 import CustomButton from "./button";
 
