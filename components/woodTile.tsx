@@ -3,7 +3,8 @@ import Wood, { TreeType } from "../src/wood";
 
 interface ICustomButtonProps {
 	woodItem: Wood;
-	odd: number;
+    odd: number;
+    onSelect: (item: Wood) => void
 }
 
 function getIconForSpecies(ts: TreeType) {
@@ -62,7 +63,7 @@ export default class WoodTile extends Component<ICustomButtonProps, {}> {
 		console.log("counter", this.props.odd);
 
 		return (
-			<div>
+			<div onClick={() => this.props.onSelect(this.props.woodItem)}>
 				<div className={"tile-container " + (this.props.odd % 2 === 0 ? "even-element" : "odd-element")}>
 					<span className="wood-tile-name">{name}</span>
 					<span className="wood-tile-location">{location}</span>

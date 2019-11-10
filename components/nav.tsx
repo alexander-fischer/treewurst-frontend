@@ -3,11 +3,14 @@ import RangerTemplate from "./templates/ranger";
 import IssueTemplate from "./templates/issue";
 import IssueModel from "../src/models/issue-model";
 import WoodList from "./woodList";
+import WoodDetailView from "./detailView";
+import Wood from "../src/wood";
+import AddWoodPage from "./addWood";
 
 interface INavProps {
-    selectTemplate: (template: any) => void
-    setIssue: (issue: IssueModel) => void
-    issues: IssueModel[]
+	selectTemplate: (template: any) => void;
+	setIssue: (issue: IssueModel) => void;
+	issues: IssueModel[];
 }
 
 class Nav extends Component<INavProps, {}> {
@@ -40,11 +43,10 @@ class Nav extends Component<INavProps, {}> {
 		);
 	}
 
-    selectRangerTemplate = () => {
-        const selectedTemplate = <RangerTemplate
-            issues={this.props.issues} />
-        this.props.selectTemplate(selectedTemplate)
-    }
+	selectRangerTemplate = () => {
+		const selectedTemplate = <RangerTemplate issues={this.props.issues} />;
+		this.props.selectTemplate(selectedTemplate);
+	};
 
 	selectIssueTemplate = () => {
 		const selectedTemplate = <IssueTemplate setIssue={this.props.setIssue} />;
@@ -52,7 +54,22 @@ class Nav extends Component<INavProps, {}> {
 	};
 
 	selectWoodListTemplate = () => {
-		const selectedTemplate = <WoodList />;
+		const selectedTemplate = (
+			<WoodList
+				onSelectAdd={() => this.selectAddWoodTemplate()}
+				onSelectTile={(item: Wood) => this.selectWoodTileTemplate(item)}
+			/>
+		);
+		this.props.selectTemplate(selectedTemplate);
+	};
+
+	selectWoodTileTemplate = (item: Wood) => {
+		const selectedTemplate = <WoodDetailView woodItem={item} />;
+		this.props.selectTemplate(selectedTemplate);
+	};
+
+	selectAddWoodTemplate = () => {
+		const selectedTemplate = <AddWoodPage />;
 		this.props.selectTemplate(selectedTemplate);
 	};
 }
