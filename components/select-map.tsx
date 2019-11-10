@@ -21,20 +21,12 @@ export default class SelectMap extends Component<ITreeMapProps, {}> {
             lng: 13.8213171,
         },
         zoom: 13,
-        geoJSON: null
+        latlng: null
     }
 
     render() {
         const position = [this.state.center.lat, this.state.center.lng]
         const { width, height } = this.props
-        const { geoJSON } = this.state
-
-        let geoJSONComponent = null
-        if (!geoJSON) {
-            geoJSONComponent = <GeoJSON
-                data={geoJSON}
-                style={geoJSONStyle} />
-        }
 
         return (
             <div className="map-wrapper">
@@ -46,9 +38,6 @@ export default class SelectMap extends Component<ITreeMapProps, {}> {
                         <TileLayer
                             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-
-                        {geoJSONComponent}
-
                     </Map>
                     <style jsx>{`
                         .map-root {
@@ -69,11 +58,6 @@ export default class SelectMap extends Component<ITreeMapProps, {}> {
     // TODO implement backend api
     handleClick = async (e) => {
         const latlng = e.latlng
-        const res = await getGeoJSON(latlng.lat, latlng.lng)
-
-        if (!res) return
-
-        this.setState({ geoJSON: res[1] })
-        this.props.setGeoJSONID(res[0])
+        this.setState({ latlng })
     }
 }
