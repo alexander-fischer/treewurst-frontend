@@ -25,12 +25,13 @@ class Index extends Component<WithRouterProps, { selectedTemplate: any, app: any
     }
 
     render() {
-        const { selectedTemplate } = this.state
+        const { selectedTemplate, issues } = this.state
         return (
             <div>
                 <Meta
                     title="TreeWurst" />
                 <Nav
+                    issues={issues}
                     setIssue={this.setIssue}
                     selectTemplate={this.selectTemplate} />
 
@@ -81,9 +82,9 @@ class Index extends Component<WithRouterProps, { selectedTemplate: any, app: any
         const db = firebase.firestore()
         await db.collection("issues").doc((new Date()).toISOString()).set({
             description: issue.description,
-            lat: issue.latitude,
-            lng: issue.longitude,
-            type: issue.issueType
+            latitude: issue.latitude,
+            longitude: issue.longitude,
+            issueType: issue.issueType
         })
     }
 

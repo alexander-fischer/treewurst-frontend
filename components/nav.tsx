@@ -6,6 +6,7 @@ import IssueModel from "../src/models/issue-model"
 interface INavProps {
     selectTemplate: (template: any) => void
     setIssue: (issue: IssueModel) => void
+    issues: IssueModel[]
 }
 
 class Nav extends Component<INavProps, {}> {
@@ -33,7 +34,8 @@ class Nav extends Component<INavProps, {}> {
     }
 
     selectRangerTemplate = () => {
-        const selectedTemplate = <RangerTemplate />
+        const selectedTemplate = <RangerTemplate
+            issues={this.props.issues} />
         this.props.selectTemplate(selectedTemplate)
     }
 
