@@ -8,21 +8,29 @@ import Wood from "../src/wood";
 import AddWoodPage from "./addWood";
 
 interface INavProps {
-	selectTemplate: (template: any) => void
-	setIssue: (issue: IssueModel) => void
-	issues: IssueModel[]
+	selectTemplate: (template: any) => void;
+	setIssue: (issue: IssueModel) => void;
+	issues: IssueModel[];
 }
 
 class Nav extends Component<INavProps, {}> {
 	render() {
 		return (
 			<nav>
-				<div className="flex justify-center bg-gray-100 p-4 w-full">
-					<div className="flex w-full text-gray-700">
+				<div
+					className="flex justify-center bg-gray-100 p-4 w-full"
+					style={{ backgroundColor: "#008C0E", color: "white" }}
+				>
+					<div className="flex w-full">
 						<div className="p-2">
 							<a className="" onClick={this.selectIssueTemplate} style={{ cursor: "pointer" }}>
 								Home
 							</a>
+							<a
+								className=""
+								onClick={this.selectWoodListTemplate}
+								style={{ cursor: "pointer", marginLeft: "20px" }}
+							>
 								Wälder
 							</a>
 						</div>
