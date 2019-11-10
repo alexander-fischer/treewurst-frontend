@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Wood from "../src/wood";
-import PageTitle from "./PageTitle";
+import PageTitle from "./pageTitle";
 
 interface IWoodDetailViewProps {
     woodItem: Wood,
