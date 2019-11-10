@@ -20,7 +20,7 @@ const RangerTemplate = (props: IRangerTemplateProps) => {
                     height="500px" />
             </div>
             <div className="flex justify-center mt-4 mb-8">
-                <div className="w-3/4">
+                <div className="lg:w-1/2 w-5/6 items-center">
                     <Issues
                         issues={props.issues} />
                 </div>
