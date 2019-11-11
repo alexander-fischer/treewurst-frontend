@@ -1,8 +1,5 @@
 import { Component } from "react"
 import IssueModel, { ISSUE_TYPE } from "../src/models/issue-model"
-import * as firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/firestore";
 
 interface IIssuesProps {
     issues: IssueModel[]
@@ -79,15 +76,7 @@ class Issues extends Component<IIssuesProps, {}> {
     }
 
     updateIssue = async (issue: IssueModel) => {
-        const db = firebase.firestore()
-        await db.collection("issues").doc(issue.id).update({
-            issue: issue.id,
-            description: issue.description,
-            latitude: issue.latitude,
-            longitude: issue.longitude,
-            issueType: issue.issueType,
-            isResolved: true
-        })
+        console.log("Issue:", issue)
     }
 
 }

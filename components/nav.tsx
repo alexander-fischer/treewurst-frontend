@@ -9,7 +9,6 @@ import AddWoodPage from "./addWood";
 
 interface INavProps {
 	selectTemplate: (template: any) => void;
-	setIssue: (issue: IssueModel) => void;
 	issues: IssueModel[];
 }
 
@@ -52,7 +51,7 @@ class Nav extends Component<INavProps, {}> {
 	};
 
 	selectIssueTemplate = () => {
-		const selectedTemplate = <IssueTemplate setIssue={this.props.setIssue} />;
+		const selectedTemplate = <IssueTemplate />;
 		this.props.selectTemplate(selectedTemplate);
 	};
 

@@ -3,7 +3,6 @@ import Loading from "../loading"
 import IssueModel, { ISSUE_TYPE } from "../../src/models/issue-model"
 
 interface IIssueTemplateProps {
-    setIssue: (issue: IssueModel) => void
 }
 
 class IssueTemplate extends Component<IIssueTemplateProps, {}> {
@@ -65,7 +64,7 @@ class IssueTemplate extends Component<IIssueTemplateProps, {}> {
                     </div>
 
                     <div className="flex justify-center mt-4">
-                        <button onClick={this.onClickBtn} className="hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" style={{backgroundColor: "#008C0E"}}>
+                        <button onClick={this.onClickBtn} className="hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" style={{ backgroundColor: "#008C0E" }}>
                             Problem absenden
                         </button>
                     </div>
@@ -120,8 +119,7 @@ class IssueTemplate extends Component<IIssueTemplateProps, {}> {
         if (!position) return
 
         const issue = new IssueModel(description, position.coords.latitude, position.coords.longitude, selectedOption, false)
-        this.props.setIssue(issue)
-
+        console.log(issue)
         this.setState({ position: null, description: "" })
     }
 }

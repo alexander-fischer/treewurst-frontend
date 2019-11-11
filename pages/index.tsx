@@ -5,16 +5,11 @@ import { withRouter } from "next/router";
 import { WithRouterProps } from "next/dist/client/with-router";
 import IssueTemplate from "../components/templates/issue";
 
-import * as firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/firestore";
-import IssueModel from "../src/models/issue-model";
-
 class Index extends Component<WithRouterProps, { selectedTemplate: any; app: any; issues: any[] }> {
 	constructor(props: WithRouterProps) {
 		super(props);
 
-		const selectedTemplate = <IssueTemplate setIssue={this.setIssue} />;
+		const selectedTemplate = <IssueTemplate />;
 		this.state = {
 			selectedTemplate,
 			app: null,
@@ -27,7 +22,7 @@ class Index extends Component<WithRouterProps, { selectedTemplate: any; app: any
 		return (
 			<div style={{ color: "#626262" }}>
 				<Meta title="TreeWurst" />
-				<Nav issues={issues} setIssue={this.setIssue} selectTemplate={this.selectTemplate} />
+				<Nav issues={issues} selectTemplate={this.selectTemplate} />
 
 				{selectedTemplate}
 			</div>
@@ -35,55 +30,12 @@ class Index extends Component<WithRouterProps, { selectedTemplate: any; app: any
 	}
 
 	componentDidMount() {
-		this.initFirebase();
 		this.getIssues();
 	}
 
-	firebaseConfig = {
-		apiKey: "AIzaSyDD5O-60ru9Jz8olQ57duxliRjB4pY9Y4A",
-		authDomain: "treewurst.firebaseapp.com",
-		databaseURL: "https://treewurst.firebaseio.com",
-		projectId: "treewurst",
-		storageBucket: "treewurst.appspot.com",
-		messagingSenderId: "283130025049",
-		appId: "1:283130025049:web:312075581cbe28b27d4d48",
-	};
-
-	initFirebase = () => {
-		const apps = firebase.apps;
-		if (apps.length === 0) {
-			const app = firebase.initializeApp(this.firebaseConfig);
-			this.setState({ app });
-		} else {
-			this.setState({ app: apps[0] });
-		}
-	};
-
 	getIssues = () => {
-		const db = firebase.firestore();
-
-		db.collection("issues").onSnapshot(querySnapshot => {
-			const issues = [];
-			querySnapshot.forEach(doc => {
-				issues.push(doc.data());
-			});
-			this.setState({ issues });
-		});
-	};
-
-	setIssue = async (issue: IssueModel) => {
-		const db = firebase.firestore();
-		const id = new Date().toISOString()
-		await db
-			.collection("issues")
-			.doc(id)
-			.set({
-				id,
-				description: issue.description,
-				latitude: issue.latitude,
-				longitude: issue.longitude,
-				issueType: issue.issueType,
-			});
+		const issues = [{ "description": "Baum ist kaputt", "id": "2019-11-10T06:16:15.556Z", "isResolved": true, "issue": "2019-11-10T06:16:15.556Z", "issueType": "DAMAGED_TREE", "latitude": 51.02963758157046, "longitude": 13.738744754694709 }, { "description": "Das ist mal ein sehr gesunder Baum!", "id": "2019-11-10T09:06:56.848Z", "isResolved": true, "issue": "2019-11-10T09:06:56.848Z", "issueType": "HEALTHY_TREE", "latitude": 51.02967422939689, "longitude": 13.738581951416377 }, { "description": "Mein Lieblingsbaum ist leider krank :(", "id": "2019-11-10T10:20:19.314Z", "isResolved": true, "issue": "2019-11-10T10:20:19.314Z", "issueType": "TREE_SICK", "latitude": 51.029638356121545, "longitude": 13.738745106393345 }, { "description": "Eine Teewurst hat mich attackiert!!", "id": "2019-11-10T10:25:10.161Z", "issueType": "MISC", "latitude": 51.02983188383219, "longitude": 13.738948871144228 }, { "description": "Tut mir leid!", "id": "2019-11-10T12:43:46.814Z", "issueType": "DAMAGED_TREE", "latitude": 51.0303567, "longitude": 13.7444765 }, { "description": "TEST", "id": "2019-11-11T14:07:49.158Z", "issueType": "DAMAGED_TREE", "latitude": 51.0560541, "longitude": 13.731939599999999 }]
+		this.setState({ issues })
 	};
 
 	selectTemplate = (template: any) => {
